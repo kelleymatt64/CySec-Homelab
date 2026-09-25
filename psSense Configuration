@@ -29,7 +29,7 @@ pfSense acts as the lab's firewall, router, and DHCP server. It isolates the lab
 5. Installed pfSense **CE 2.9.0**, ejected the ISO, and rebooted.
 
 📸 _Screenshot: Netgate Installer edition selection_
-<!-- ![Installer](../screenshots/pfsense-installer.png) -->
+
 
 ---
 
@@ -42,7 +42,7 @@ Used console **option 2** to set the LAN interface:
 - **DHCP range:** `10.10.10.100` to `10.10.10.200`
 
 📸 _Screenshot: pfSense console showing WAN/LAN assignments_
-<!-- ![Console](../screenshots/pfsense-console.png) -->
+
 
 ---
 
@@ -64,7 +64,7 @@ After the domain controller was online, updated **Services → DHCP Server → L
 - **Domain name:** `lab.local`
 
 📸 _Screenshot: pfSense dashboard_
-<!-- ![Dashboard](../screenshots/pfsense-dashboard.png) -->
+
 
 ---
 
