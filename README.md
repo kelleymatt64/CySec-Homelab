@@ -78,7 +78,3 @@ _Coming soon: attack simulations, Splunk searches, and detection write-ups._
 pfSense · Windows Server 2025 · Active Directory · DNS · DHCP · VirtualBox · Splunk · Sysmon · Kali Linux · Ubuntu Server
 
 ---
-
-## 💰 Cost
-
-**$0.** Every component uses free, community, or evaluation licensing.
