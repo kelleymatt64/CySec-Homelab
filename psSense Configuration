@@ -28,7 +28,6 @@ pfSense acts as the lab's firewall, router, and DHCP server. It isolates the lab
 4. Selected **Install CE** (Community Edition), with the **ZFS** file system and **Stripe** layout.
 5. Installed pfSense **CE 2.9.0**, ejected the ISO, and rebooted.
 
-📸 _Screenshot: Netgate Installer edition selection_
 
 
 ---
