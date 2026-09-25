@@ -1,0 +1,84 @@
+# Step 1: pfSense Firewall
+
+**Status:** ✅ Complete
+
+pfSense acts as the lab's firewall, router, and DHCP server. It isolates the lab on its own internal network while still giving it internet access for updates and activation.
+
+---
+
+## VM Configuration
+
+| Setting | Value |
+|---------|-------|
+| OS Type | BSD / FreeBSD (64-bit) |
+| RAM | 2 GB |
+| CPU | 1 core |
+| Disk | 16 GB |
+| Adapter 1 (WAN) | NAT |
+| Adapter 2 (LAN) | Internal Network: `LabNet` |
+| Audio / USB | Disabled |
+
+---
+
+## Installation
+
+1. Downloaded the **Netgate Installer** (AMD64 ISO for virtual machines) from the Netgate store (free, account required).
+2. Booted the installer. It pulls the latest pfSense packages over the WAN (NAT) connection.
+3. Assigned interfaces: **WAN = em0**, **LAN = em1**.
+4. Selected **Install CE** (Community Edition), with the **ZFS** file system and **Stripe** layout.
+5. Installed pfSense **CE 2.9.0**, ejected the ISO, and rebooted.
+
+📸 _Screenshot: Netgate Installer edition selection_
+<!-- ![Installer](../screenshots/pfsense-installer.png) -->
+
+---
+
+## Console Configuration
+
+Used console **option 2** to set the LAN interface:
+
+- **LAN IP:** `10.10.10.1/24`
+- **DHCP:** Enabled
+- **DHCP range:** `10.10.10.100` to `10.10.10.200`
+
+📸 _Screenshot: pfSense console showing WAN/LAN assignments_
+<!-- ![Console](../screenshots/pfsense-console.png) -->
+
+---
+
+## Web Setup Wizard
+
+Accessed at `https://10.10.10.1` from a VM on the lab network.
+
+| Setting | Value |
+|---------|-------|
+| Hostname | `fw01` |
+| Domain | `lab.local` |
+| WAN Type | DHCP (defaults) |
+| Block RFC1918 / Bogons | Enabled |
+| Admin password | Changed from default |
+
+After the domain controller was online, updated **Services → DHCP Server → LAN**:
+
+- **DNS Server:** `10.10.10.10` (DC01)
+- **Domain name:** `lab.local`
+
+📸 _Screenshot: pfSense dashboard_
+<!-- ![Dashboard](../screenshots/pfsense-dashboard.png) -->
+
+---
+
+## 🔧 Challenges & Fixes
+
+| Problem | Cause | Fix |
+|---------|-------|-----|
+| Couldn't add a second network adapter | VirtualBox settings were in **Basic** mode, which only shows Adapter 1 | Switched to **Expert** mode to reveal Adapters 1–4 |
+| Risk of rebooting back into the installer | ISO still attached to the virtual optical drive | Removed the disk via **Devices → Optical Drives** before rebooting |
+
+---
+
+## 💡 Key Takeaways
+
+- A firewall VM with a NAT WAN and an internal LAN creates an isolated network that still has internet access.
+- pfSense has to boot **first**. Every other VM depends on it for DHCP and internet access.
+- Choosing a lab subnet (`10.10.10.0/24`) that doesn't overlap the home network avoids routing conflicts.
